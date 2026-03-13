@@ -19,6 +19,13 @@ running = True
 
 gravity = 9.8
 
+class CoordinateSystem:
+    def __init__(self) -> None:
+        pass
+
+    def draw(self) -> None:
+        pygame.draw.line(screen, (255, 0, 0), (0, 0), (0, height), 4)
+
 class Ball:
     def __init__(self) -> None:
         self.radius = 15
@@ -51,6 +58,7 @@ class Stopwatch:
 
 ball = Ball()
 stopwatch = Stopwatch()
+coordinate_system = CoordinateSystem()
 
 while running:
     for event in pygame.event.get():
@@ -62,6 +70,7 @@ while running:
     # Render
     ball.draw()
     stopwatch.draw()
+    coordinate_system.draw()
 
     pygame.display.flip()
 
