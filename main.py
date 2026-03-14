@@ -1,10 +1,8 @@
-import math
-
 import pygame
 
 pygame.init()
 
-width = 800
+width = 600
 height = 600
 
 screen = pygame.display.set_mode((width, height))
@@ -15,23 +13,37 @@ time_sec = 0
 delta = 0
 velocity = 0
 
+# Canvas
+zoom = 50 # canvas cell's width and height in pixels
+cell_x = 6
+cell_y = 6
+canvas_width = zoom * cell_x
+canvas_height = zoom * cell_y
+
 running = True
 
 gravity = 9.8
 
 class CoordinateSystem:
     def __init__(self) -> None:
-        pass
+        self.font = pygame.font.SysFont("Arial", size=16)
 
     def draw(self) -> None:
-        pygame.draw.line(screen, (255, 0, 0), (0, 0), (0, height), 4)
+        # y axis
+        y_point_division = canvas_height / cell_y
+        pygame.draw.line(screen, (255, 0, 0), (0, 0), (0, canvas_height), 2)
+        for point_number in range(cell_y):
+            pygame.draw.line(screen, (255, 0, 0), (0, point_number*y_point_division), (20, point_number*y_point_division), 2)
+            point_text = pygame.font.Font.render(self.font, f"{point_number}", False, (255, 0, 0))
+            screen.blit(point_text, (25, point_number*y_point_division))
+            
 
 class Ball:
     def __init__(self) -> None:
         self.radius = 15
         self.color = (255, 255, 0)
 
-        self.initial_position = (int(width/2-15), int(height/2-15))
+        self.initial_position = (int(canvas_width/2-15), int(canvas_height/2-15))
         self.position_x = self.initial_position[0]
         self.position_y = self.initial_position[1]
         self.displacement_y = self.initial_position[1] - self.position_y # DELETE THIS
@@ -45,7 +57,8 @@ class Stopwatch:
     def __init__(self) -> None:
         self.multiplier = 1
 
-        self.font = pygame.font.SysFont("Arial", size=32)
+        # MOVE
+        self.font = pygame.font.SysFont("Arial", size=24)
 
     def draw(self) -> None:
         output_time_elapsed = pygame.font.Font.render(self.font, f"Time elapsed (s): {time_sec}", False, (255, 255, 255))
@@ -78,8 +91,8 @@ while running:
 
     new_position_y = int( 0.5*ball.acceleration*(time_sec**2) * 100 ) # h = 1/2*gt2 100 HERE IS 100 px = 1 m
 
-    if new_position_y >= height:
-        new_position_y = height
+    if new_position_y >= canvas_height:
+        new_position_y = canvas_height
 
     ball.position_y = new_position_y
     ball.displacement_y = ball.initial_position[1] - ball.position_y # DELETE THIS
@@ -87,8 +100,7 @@ while running:
     delta = clock.tick(60)
     time += delta
     time_sec = time / 1000
-    velocity = math.sqrt(velocity**2 + 2*ball.acceleration*ball.displacement_y)
-    print(ball.displacement_y)
+    # velocity = math.sqrt(velocity**2 + 2*ball.acceleration*ball.displacement_y)
 
 # MAKE A RED LINE DETERMINING THE 0 SURFACE. THE TOP IS 6 m FOR INSTANCE. 600px
 pygame.quit()
