@@ -12,6 +12,8 @@ time = 0
 time_sec = 0
 delta = 0
 velocity = 0
+is_fallen = False
+displacement = 0
 
 # Canvas
 zoom = 50 # canvas cell's width and height in pixels
@@ -63,11 +65,15 @@ class Stopwatch:
     def draw(self) -> None:
         output_time_elapsed = pygame.font.Font.render(self.font, f"Time elapsed (s): {time_sec}", False, (255, 255, 255))
         output_delta = pygame.font.Font.render(self.font, f"Delta: {delta}", False, (255, 255, 255))
-        output_velocity = pygame.font.Font.render(self.font, f"Velocity: {velocity}", False, (255, 255, 255))
+        output_velocity = pygame.font.Font.render(self.font, f"Velocity: {velocity}", False, (255, 255, 255))        
+        output_displacement = pygame.font.Font.render(self.font, f"Displacement: {displacement}", False, (255, 255, 255))        
+        output_fallen = pygame.font.Font.render(self.font, f"Is fallen: {is_fallen}", False, (255, 255, 255))
 
         screen.blit(output_time_elapsed, (0, 0))
         screen.blit(output_delta, (0, output_time_elapsed.get_rect().height))
-        screen.blit(output_velocity, (0, output_time_elapsed.get_rect().height + output_delta.get_rect().height))
+        screen.blit(output_velocity, (0, output_time_elapsed.get_rect().height * 2))
+        screen.blit(output_displacement, (0, output_time_elapsed.get_rect().height * 3))
+        screen.blit(output_fallen, (0, output_time_elapsed.get_rect().height * 4))
 
 ball = Ball()
 stopwatch = Stopwatch()
@@ -89,10 +95,12 @@ while running:
 
     # Logic
 
+    # ANOTHER EQUATION
     new_position_y = int( 0.5*ball.acceleration*(time_sec**2) * 100 ) # h = 1/2*gt2 100 HERE IS 100 px = 1 m
 
     if new_position_y >= canvas_height:
         new_position_y = canvas_height
+        is_fallen = True
 
     ball.position_y = new_position_y
     ball.displacement_y = ball.initial_position[1] - ball.position_y # DELETE THIS
