@@ -32,23 +32,32 @@ class CoordinateSystem:
 
     def draw(self) -> None:
         # y axis
+        # TODO: The other way
         y_point_division = canvas_height / cell_y
         pygame.draw.line(screen, (255, 0, 0), (0, 0), (0, canvas_height), 2)
         for point_number in range(cell_y):
             pygame.draw.line(screen, (255, 0, 0), (0, point_number*y_point_division), (20, point_number*y_point_division), 2)
             point_text = pygame.font.Font.render(self.font, f"{point_number}", False, (255, 0, 0))
             screen.blit(point_text, (25, point_number*y_point_division))
-            
+
+        # x axis
+        x_point_division = canvas_width / cell_x
+        pygame.draw.line(screen, (255, 0, 0), (0, canvas_height), (canvas_width, canvas_height), 2)
+        for point_number in range(cell_x):
+            pygame.draw.line(screen, (255, 0, 0), (point_number*x_point_division, canvas_height), (point_number*x_point_division, canvas_height+20), 2)
+            point_text = pygame.font.Font.render(self.font, f"{point_number}", False, (255, 0, 0))
+            screen.blit(point_text, (point_number*x_point_division, 25+canvas_height))
 
 class Ball:
     def __init__(self) -> None:
         self.radius = 15
         self.color = (255, 255, 0)
 
-        self.initial_position = (int(canvas_width/2-15), int(canvas_height/2-15))
+        self.initial_position = (zoom*cell_x/2, zoom*cell_y)
         self.position_x = self.initial_position[0]
         self.position_y = self.initial_position[1]
-        self.displacement_y = self.initial_position[1] - self.position_y # DELETE THIS
+
+        self.displacement = self.initial_position[1] - self.position_y # DELETE THIS
         self.velocity = 0
         self.acceleration = gravity
     
