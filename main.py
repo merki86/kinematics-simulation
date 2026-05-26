@@ -1,4 +1,6 @@
 import pygame
+
+from properties import *
 from ruler import Ruler
 
 pygame.init()
@@ -9,20 +11,13 @@ pygame.init()
 #
 #
 
-FPS = 60
-WIDTH = 500
-HEIGHT = 500
-pixels_in_meter = 10
-
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mechanics simulations - Kinematics")
 
 clock = pygame.time.Clock()
-ruler = Ruler()
+ruler = Ruler(5, (255, 0, 0))
 
 time = 0
-canvas_width = WIDTH / pixels_in_meter
-canvas_height = HEIGHT / pixels_in_meter
 object_radius = 1
 object_pos = pygame.Vector2(canvas_width/2, 0)
 

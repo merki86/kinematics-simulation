@@ -1,22 +1,29 @@
 import pygame
 
+from properties import *
+
 class Ruler:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, thickness, color) -> None:
+        self.thickness = thickness
+        self.color = color
+
+        self.font_name = "sans-serif"
+        self.font_size = 12
 
     def draw(self):
-        surface = pygame.Surface((500, 500))
+        surface = pygame.Surface((WIDTH, HEIGHT))
 
-        pygame.draw.line(surface, (255, 0, 0), (0, 500), (500, 500), 5) # horizontal line
-        pygame.draw.line(surface, (255, 0, 0), (0, 0), (0, 500), 5) # vertical line
+        pygame.draw.line(surface, self.color, (0, WIDTH), (WIDTH, HEIGHT), self.thickness) # horizontal line
+        pygame.draw.line(surface, self.color, (0, 0), (0, HEIGHT), self.thickness) # vertical line
 
-        font = pygame.font.SysFont("sans-serif", 12)
-        for x_scale_div_num in range(50):
-            surface.blit(font.render(f"{x_scale_div_num}", False, (255, 0, 0)), (x_scale_div_num*10, 500-15))
-            pygame.draw.line(surface, (255, 0, 0), (x_scale_div_num*10, 500), (x_scale_div_num*10, 500-10))
+        font = pygame.font.SysFont(self.font_name, self.font_size)
 
-        for y_scale_div_num in range(50):
-            surface.blit(font.render(f"{50-y_scale_div_num}", False, (255, 0, 0)), (15, y_scale_div_num*10))
-            pygame.draw.line(surface, (255, 0, 0), (0, y_scale_div_num*10), (10, y_scale_div_num*10))
+        for x_scale_div_num in range(canvas_width):
+            surface.blit(font.render(f"{x_scale_div_num}", False, self.color), (x_scale_div_num*pixels_in_meter, 500-15))
+            pygame.draw.line(surface, self.color, (x_scale_div_num*pixels_in_meter, 500), (x_scale_div_num*pixels_in_meter, 500-10))
+
+        for y_scale_div_num in range(canvas_height):
+            surface.blit(font.render(f"{canvas_height-y_scale_div_num}", False, self.color), (15, y_scale_div_num*pixels_in_meter))
+            pygame.draw.line(surface, self.color, (0, y_scale_div_num*pixels_in_meter), (10, y_scale_div_num*pixels_in_meter))
 
         return surface
