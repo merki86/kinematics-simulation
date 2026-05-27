@@ -14,7 +14,7 @@ class Panel:
 
         font = pygame.font.SysFont(self.font_name, self.font_size)
 
-        self.surface.blit(font.render(f"time: {round(time, 3)}", True, (255, 255, 255)), (0, 0))
-        self.surface.blit(font.render(f"displacement: {round(dy, 3)}", True, (255, 255, 255)), (0, 1*font.get_height()))
+        self.surface.blit(font.render(f"time (s): {round(time, 3)}", True, (255, 255, 255)), (0, 0))
+        self.surface.blit(font.render(f"displacement (m): {round(dy, 3)}", True, (255, 255, 255)), (0, 1*font.get_height()))
 
         return self.surface

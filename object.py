@@ -10,11 +10,7 @@ class Object:
         self.surface = pygame.Surface((canvas_width*pixels_in_meter, canvas_height*pixels_in_meter), pygame.SRCALPHA)
 
     def update(self, time) -> int:
-        dy = 0**2 + 0.5*9.8*time**2 # y = ut + (1/2)gt2 , in meters
-        if self.position.y + dy + self.radius >= canvas_height:
-            self.position.y = canvas_height - self.radius
-            dy = 0
-        self.position.y += dy
+        dy = 0
 
         return dy
 

@@ -18,7 +18,7 @@ pygame.display.set_caption("Mechanics simulations - Kinematics")
 
 clock = pygame.time.Clock()
 ruler = Ruler(pygame.Color(255, 0, 0))
-object = Object(5)
+object = Object(1)
 panel = Panel()
 
 time = 0
