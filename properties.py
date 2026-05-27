@@ -1,9 +1,11 @@
 import pygame
 
 FPS = 60
-WIDTH = 500
-HEIGHT = 500
-pixels_in_meter = 10
+WIDTH = 600
+HEIGHT = 600
+pixels_in_meter = 20
 
-canvas_width = WIDTH // pixels_in_meter
-canvas_height = HEIGHT // pixels_in_meter
+width_margin = 50
+height_margin = 50
+canvas_width = (WIDTH - width_margin*2) // pixels_in_meter
+canvas_height = (HEIGHT - height_margin*2) // pixels_in_meter

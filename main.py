@@ -32,8 +32,9 @@ while running:
     screen.fill((0, 0, 0))
 
     # render all the surfaces onto original Surface
-    screen.blit(ruler.draw(), (0, 0))
-    screen.blit(object.draw(time), (0, 0))
+    canvas_pos = pygame.Vector2(width_margin, height_margin)
+    screen.blit(object.draw(time), canvas_pos)
+    screen.blit(ruler.draw(), canvas_pos)
 
     # reveal on screen
     pygame.display.flip()

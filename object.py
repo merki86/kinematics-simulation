@@ -7,7 +7,7 @@ class Object:
         self.radius = radius
         self.position = pygame.Vector2(canvas_width/2, 0)
 
-        self.surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+        self.surface = pygame.Surface((canvas_width*pixels_in_meter, canvas_height*pixels_in_meter), pygame.SRCALPHA)
 
     def draw(self, time) -> pygame.Surface:
         self.surface.fill((0, 0, 0, 0))
