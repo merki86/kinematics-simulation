@@ -2,6 +2,7 @@ import pygame
 
 from properties import *
 from ruler import Ruler
+from object import Object
 
 pygame.init()
 
@@ -16,11 +17,9 @@ pygame.display.set_caption("Mechanics simulations - Kinematics")
 
 clock = pygame.time.Clock()
 ruler = Ruler(5, pygame.Color(255, 0, 0))
+object = Object(5)
 
 time = 0
-object_radius = 5
-object_pos = pygame.Vector2(canvas_width/2, 0)
-
 running = True
 
 while running:
@@ -32,17 +31,9 @@ while running:
     # wipe
     screen.fill((0, 0, 0))
 
-    # draw the Ruler Surface onto original Surface    
+    # render all the surfaces onto original Surface
     screen.blit(ruler.draw(), (0, 0))
-
-    # render
-    pygame.draw.circle(screen, (255, 255, 0), (object_pos.x*pixels_in_meter, object_pos.y*pixels_in_meter), object_radius*pixels_in_meter)
-
-    dy = 0**2 + 0.5*9.8*time**2 # y = ut + (1/2)gt2 , in meters
-    if object_pos.y + dy + object_radius >= canvas_height:
-        object_pos.y = canvas_height - object_radius
-        dy = 0
-    object_pos.y += dy
+    screen.blit(object.draw(time), (0, 0))
 
     # reveal on screen
     pygame.display.flip()
