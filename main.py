@@ -15,10 +15,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mechanics simulations - Kinematics")
 
 clock = pygame.time.Clock()
-ruler = Ruler(5, (255, 0, 0))
+ruler = Ruler(5, pygame.Color(255, 0, 0))
 
 time = 0
-object_radius = 1
+object_radius = 5
 object_pos = pygame.Vector2(canvas_width/2, 0)
 
 running = True
