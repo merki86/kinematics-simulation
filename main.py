@@ -35,13 +35,13 @@ while running:
     screen.fill((0, 0, 0))
 
     # update logic
-    dy = object.update(time)
+    mouse_cord, obj_cord = object.update(time)
 
     # render all the surfaces onto original Surface
     canvas_pos = pygame.Vector2(width_margin, height_margin)
     screen.blit(object.draw(), canvas_pos)
     screen.blit(ruler.draw(), canvas_pos)
-    screen.blit(panel.draw(time, dy), (0, 0))
+    screen.blit(panel.draw(time, mouse_cord, obj_cord), (0, 0))
 
     # reveal on screen
     pygame.display.flip()
