@@ -25,7 +25,7 @@ class Ruler:
         for y_scale_div_num in range(canvas_height+1):
             pygame.draw.line(self.surface, pygame.Color(self.color.r//3, self.color.g//3, self.color.b//3), (0, y_scale_div_num*pixels_in_meter), (canvas_width*pixels_in_meter, y_scale_div_num*pixels_in_meter))
             pygame.draw.line(self.surface, self.color, (0, y_scale_div_num*pixels_in_meter), (10, y_scale_div_num*pixels_in_meter))
-            self.surface.blit(font.render(f"{canvas_height-y_scale_div_num}", True, self.color), (15, y_scale_div_num*pixels_in_meter))
+            self.surface.blit(font.render(f"{abs(canvas_height-y_scale_div_num)}", True, self.color), (15, y_scale_div_num*pixels_in_meter))
 
         pygame.draw.line(self.surface, self.color, (0, canvas_width*pixels_in_meter), (canvas_width*pixels_in_meter, canvas_height*pixels_in_meter), self.thickness) # horizontal line
         pygame.draw.line(self.surface, self.color, (0, 0), (0, canvas_height*pixels_in_meter), self.thickness) # vertical line
