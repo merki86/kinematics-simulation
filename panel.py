@@ -9,12 +9,12 @@ class Panel:
         self.font_name = "sans-serif"
         self.font_size = 24
 
-    def draw(self, time, dy) -> pygame.Surface:
+    def draw(self, time, coordinates) -> pygame.Surface:
         self.surface.fill((0, 0, 0, 0))
 
         font = pygame.font.SysFont(self.font_name, self.font_size)
 
         self.surface.blit(font.render(f"time (s): {round(time, 3)}", True, (255, 255, 255)), (0, 0))
-        self.surface.blit(font.render(f"displacement (m): {round(dy, 3)}", True, (255, 255, 255)), (0, 1*font.get_height()))
+        self.surface.blit(font.render(f"selected coordinates: {coordinates}", True, (255, 255, 255)), (0, 1*font.get_height()))
 
         return self.surface

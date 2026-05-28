@@ -6,13 +6,20 @@ class Object:
     def __init__(self, radius) -> None:
         self.radius = radius
         self.position = pygame.Vector2(canvas_width/2, 0)
+        self.mouse_pos = pygame.Vector2(0, 0)
 
         self.surface = pygame.Surface((canvas_width*pixels_in_meter, canvas_height*pixels_in_meter), pygame.SRCALPHA)
 
-    def update(self, time) -> int:
+    def handle_event(self, event: pygame.event.Event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                self.mouse_pos = pygame.Vector2(event.pos[0]-width_margin, event.pos[1]-height_margin) // pixels_in_meter
+                self.position = self.mouse_pos
+
+    def update(self, time) -> pygame.Vector2:
         dy = 0
 
-        return dy
+        return self.mouse_pos
 
     def draw(self) -> pygame.Surface:
         self.surface.fill((0, 0, 0, 0))
