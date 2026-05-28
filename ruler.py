@@ -11,8 +11,6 @@ class Ruler:
         self.font_size = 14
 
         self.surface = pygame.Surface((canvas_width*pixels_in_meter+1, canvas_height*pixels_in_meter+1), pygame.SRCALPHA) # +1 because real visible surface is width-1; height-1
-        print(canvas_width)
-        print(canvas_height)
 
     def draw(self) -> pygame.Surface:
         self.surface.fill((0, 0, 0, 0))
